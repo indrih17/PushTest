@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PushTest</string>
+    <string name="first_start_warning">Необходимо добавить приложение в автозапуск для того, чтобы Вам " +
+                    " вовремя приходили уведомления. Продолжить?</string>
+</resources>
