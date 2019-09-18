@@ -1,6 +1,6 @@
 package com.indrih.pushtest.base
 
-import android.Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,18 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.indrih.pushtest.R
-import com.indrih.pushtest.china.showBadDeviceWarning
-import com.indrih.pushtest.utils.PermissionProvider
+import com.indrih.pushtest.fixes.AlertCreatorForPushFixes
+import com.indrih.pushtest.toast
 
 class MainActivity : AppCompatActivity() {
     private val loggerTag = "MainActivity"
-    private val permissionProvider = PermissionProvider(
-        requestCode = 1,
-        permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            arrayOf(REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
-        else
-            emptyArray()
-    )
+    private val pushFixes = AlertCreatorForPushFixes(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,13 +21,14 @@ class MainActivity : AppCompatActivity() {
 
         // Base
 
-        if (!permissionProvider.hasAllPermissions(this))
-            permissionProvider.checkPermissions(this)
+        try {
+            pushFixes.autoStart(R.string.auto_start_message)
 
-        showBadDeviceWarning(
-            context = this,
-            messageForUser = R.string.first_start_warning
-        )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                pushFixes.batteryOptimization(R.string.battery_optimization_message)
+        } catch (e: Exception) {
+            toast("Unable to show settings")
+        }
 
         // Other
 
@@ -59,17 +54,8 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        if (!permissionProvider.isAllPermissionsGranted(requestCode, permissions, grantResults))
-            closeApp()
-    }
-
-    fun closeApp() {
-        moveTaskToBack(true)
-        finish()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        pushFixes.onActivityResult(requestCode)
     }
 }

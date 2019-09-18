@@ -1,20 +1,18 @@
-package com.indrih.pushtest.utils
+package com.indrih.pushtest
 
 import android.content.Context
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-fun toast(
-    context: Context,
+fun Context.toast(
     message: String,
     duration: Int = Toast.LENGTH_SHORT
 ) =
     Toast
-        .makeText(context, message, duration)
+        .makeText(this, message, duration)
         .show()
 
-fun materialAlert(
-    context: Context,
+fun Context.materialAlert(
     message: Int,
     title: Int? = null,
     positiveButtonText: Int = android.R.string.ok,
@@ -25,7 +23,7 @@ fun materialAlert(
     cancelable: Boolean,
     themeRes: Int = 0
 ) =
-    MaterialAlertDialogBuilder(context, themeRes)
+    MaterialAlertDialogBuilder(this, themeRes)
         .also { alert ->
             alert.setMessage(message)
             title?.let(alert::setTitle)
@@ -40,8 +38,6 @@ fun materialAlert(
                     it.invoke()
                 }
             }
-
-
             alert.setCancelable(cancelable)
         }
         .create()

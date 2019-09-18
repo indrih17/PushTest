@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">PushTest</string>
-    <string name="first_start_warning">Необходимо добавить приложение в автозапуск для того, чтобы Вам " +
-                    " вовремя приходили уведомления. Продолжить?</string>
+    <string name="auto_start_message">Необходимо добавить приложение в автозапуск для того, чтобы Вам вовремя приходили уведомления. Продолжить?</string>
+    <string name="battery_optimization_message">Для корректной работы приложения необходимо отключить режим энергосбережения.</string>
 </resources>
