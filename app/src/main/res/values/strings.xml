@@ -2,4 +2,7 @@
     <string name="app_name">PushTest</string>
     <string name="auto_start_message">Необходимо добавить приложение в автозапуск для того, чтобы Вам вовремя приходили уведомления. Продолжить?</string>
     <string name="battery_optimization_message">Для корректной работы приложения необходимо отключить режим энергосбережения.</string>
+    <string name="notification_message">Для корректной работы приложения необходимо провести настройки уведомлений.</string>
+    <string name="default_notification_channel_id">channel_id</string>
+    <string name="default_notification_channel_name">channel_name</string>
 </resources>
