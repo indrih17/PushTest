@@ -13,13 +13,18 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 2
-        versionName "2.0.0"
+        versionName "2.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules-debug.pro"
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -38,11 +43,19 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation "com.google.android.material:material:1.1.0-alpha10"
 
+    // Arrow
+    implementation "io.arrow-kt:arrow-data:0.8.2"
+
+    // App killer
     implementation "indrih17.app-killer-manager:app-killer-manager:$app_killer_version"
 
     // Firebase
+    implementation 'com.google.firebase:firebase-core:17.2.0'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
+        transitive = true
+    }
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
