@@ -10,11 +10,11 @@ import com.crashlytics.android.Crashlytics
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.indrih.pushtest.R
-import com.indrih.pushtest.exceptions.IntentListForActionNotFoundException
-import com.indrih.pushtest.exceptions.IntentNotAvailableException
 import com.indrih.pushtest.utils.Logger
 import com.indrih.pushtest.utils.MaterialActionDialogCreator
 import com.thelittlefireman.appkillermanager.*
+import com.thelittlefireman.appkillermanager.exceptions.IntentListForActionNotFoundException
+import com.thelittlefireman.appkillermanager.exceptions.IntentNotAvailableException
 import com.thelittlefireman.appkillermanager.managers.DevicesManager
 import com.thelittlefireman.appkillermanager.models.KillerManagerActionType
 
